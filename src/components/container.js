@@ -19,6 +19,7 @@ class Container extends Component {
             result.push(-1);
         });
         this.setState({ result })
+        this.generateActiveImagesIndexes();
     }
     recordResult = (choice, selectedIndex) => {
         let result = this.state.result;
@@ -45,7 +46,23 @@ class Container extends Component {
        
         }
 
+        console.log(result)
         this.setState({result})
+
+        if (result.indexOf(-1) == -1) {
+            this.setState({ isFeedbackRecorded: true })
+        } else {
+            this.generateActiveImagesIndexes()
+        }
+    }
+
+    generateActiveImagesIndexes = () => {
+        let min = 0;
+        let max = this.state.images.length - 1
+        const firstPhotoIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+        const secondPhotoIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        this.setState({ firstPhotoIndex, secondPhotoIndex })
     }
 
     render() {
