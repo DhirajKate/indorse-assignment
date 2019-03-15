@@ -4,7 +4,8 @@ class ButtonsContainer extends Component {
     render() {
         return (
             <div>
-                
+                <button>None of these is a Cat</button>
+                <button>Both of these are Cats</button>
             </div>
         );
     }
