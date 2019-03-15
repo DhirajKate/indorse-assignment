@@ -30,16 +30,14 @@ describe('Container component', () => {
 
         it('should display the image container', () => {
             const imageContainer = selectionContainer.childAt(0)
-            expect(imageContainer.type()).toEqual('div')
-            expect(imageContainer.hasClass('image-container')).toBeTruthy()
+            expect(imageContainer.type()).toEqual('ImageContainer')
  
         });
     
         it('should display the wrapper for buttons', () => {
             const buttonContainer = selectionContainer.childAt(1)
-            expect(buttonContainer.type()).toEqual('div')
-            expect(buttonContainer.hasClass('button-container')).toBeTruthy()
- 
+            expect(buttonContainer.type()).toEqual('ButtonsContainer')
+          
         });
     });
 
@@ -49,7 +47,7 @@ describe('Container component', () => {
             resultContainer = containerElement.childAt(1);
         });
         it('should display the results container', () => {
-            expect(selectionContainer.type()).toEqual('ResultContainer');
+            expect(resultContainer.type()).toEqual('ResultContainer');
         });
     });
    
