@@ -20,6 +20,10 @@ describe('Container component', () => {
         expect(containerElement.hasClass('container')).toBeTruthy()
     });
 
+    it('should initialize result array and update it in state', () => {
+        expect(containerElement.instance().state.result).toEqual([-1,-1])
+    });
+
     it('should display the header', () => {
         const headerElement = containerElement.childAt(0);
         expect(headerElement.type()).toEqual(Header)
@@ -39,15 +43,16 @@ describe('Container component', () => {
             const imageContainer = selectionContainer.childAt(0)
             expect(imageContainer.type()).toEqual(ImageContainer)
             expect(imageContainer.prop('images')).toEqual(mockImages)
+            expect(imageContainer.prop('firstPhotoIndex')).toEqual(0)
+            expect(imageContainer.prop('secondPhotoIndex')).toEqual(1)
  
         });
     
         it('should display the wrapper for buttons', () => {
             const buttonContainer = selectionContainer.childAt(1)
             expect(buttonContainer.type()).toEqual(ButtonsContainer)
-          
         });
-    });
+    }); 
 
     describe('when user has provided feedback for all images', () => {
         let resultContainer;
@@ -57,6 +62,90 @@ describe('Container component', () => {
         });
         it('should display the results container', () => {
             expect(resultContainer.type()).toEqual(ResultContainer);
+        });
+    });
+
+    describe('function to record the result of selection', () => {
+        it('should increase the value of selected image index by 1 and decrease value of not selected image by 1', () => {
+            containerElement.setState({result:[1,0]})
+            containerElement.instance().recordResult(0,1);
+
+            expect(containerElement.instance().state.result).toEqual([0,1])
+
+            containerElement.setState({result:[0,1]})
+            containerElement.instance().recordResult(0,0);
+
+            expect(containerElement.instance().state.result).toEqual([1,0])
+        });
+
+        it('should increase the value of selected image index by 1 and set value to 0 if value of not selected image is less than 1', () => {
+            containerElement.setState({result:[0,0]})
+            containerElement.instance().recordResult(0,1);
+
+            expect(containerElement.instance().state.result).toEqual([0,1])
+
+            containerElement.setState({result:[0,0]})
+            containerElement.instance().recordResult(0,0);
+
+            expect(containerElement.instance().state.result).toEqual([1,0])
+
+            containerElement.setState({result:[-1,0]})
+            containerElement.instance().recordResult(0,1);
+
+            expect(containerElement.instance().state.result).toEqual([0,1])
+
+            containerElement.setState({result:[0,-1]})
+            containerElement.instance().recordResult(0,0);
+
+            expect(containerElement.instance().state.result).toEqual([1,0])
+        });
+
+        it('should set value to one if selected image is -1 and set value to 0 if value of not selected image index is -1', () => {
+            containerElement.setState({result:[-1,-1]})
+            containerElement.instance().recordResult(0,1);
+
+            expect(containerElement.instance().state.result).toEqual([0,1])
+
+            containerElement.setState({result:[-1,-1]})
+            containerElement.instance().recordResult(0,0);
+
+            expect(containerElement.instance().state.result).toEqual([1,0])
+        });
+
+        it('should decrease the value of both images index by one if user says there is not cat in both images', () => {
+            containerElement.setState({result:[-1,-1]})
+            containerElement.instance().recordResult(-1);
+
+            expect(containerElement.instance().state.result).toEqual([0,0]);
+
+            containerElement.setState({result:[0,0]});
+            containerElement.instance().recordResult(-1);
+
+            expect(containerElement.instance().state.result).toEqual([0,0]);
+
+            containerElement.setState({result:[1,1]})
+            containerElement.instance().recordResult(-1);
+
+            expect(containerElement.instance().state.result).toEqual([0,0])
+
+        });
+
+        it('should increase the value of both images index by one if user says both images are of cats', () => {
+            containerElement.setState({result:[-1,-1]})
+            containerElement.instance().recordResult(1);
+
+            expect(containerElement.instance().state.result).toEqual([1,1]);
+
+            containerElement.setState({result:[0,0]});
+            containerElement.instance().recordResult(1);
+
+            expect(containerElement.instance().state.result).toEqual([1,1]);
+
+            containerElement.setState({result:[1,1]})
+            containerElement.instance().recordResult(1);
+
+            expect(containerElement.instance().state.result).toEqual([2,2])
+
         });
     });
    
