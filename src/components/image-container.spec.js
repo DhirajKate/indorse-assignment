@@ -4,10 +4,13 @@ import ImageContainer from './image-container';
 import * as ImageServices from '../service';
 
 describe('Image Container Component', () => {
-    let imageContainerElement;
+    let imageContainerElement,
+    mockRecordResultFunction;
 
     beforeAll(() => {
-        imageContainerElement = shallow(<ImageContainer images = {['1.jpg','2.jpg']}/>)
+        mockRecordResultFunction = jest.fn();
+        imageContainerElement = shallow(<ImageContainer images = {['1.jpg','2.jpg']} 
+        firstPhotoIndex = {0} secondPhotoIndex={1} recordResult = {mockRecordResultFunction}/>)
     });
 
     it('should render a imageContainer element', () => {
@@ -34,5 +37,15 @@ describe('Image Container Component', () => {
         expect(secondImageElement.children().type()).toBe('img')
         expect(secondImageElement.children().prop('width')).toBe('200px')
         expect(secondImageElement.children().prop('src')).toBe('2.jpg')
+    });
+
+    it('should record selected image', () => {
+        const firstImageElement = imageContainerElement.childAt(0).children();
+        firstImageElement.simulate('click');
+        expect(mockRecordResultFunction).toBeCalledWith(0,0);
+
+        const secondImageElement = imageContainerElement.childAt(1).children();
+        secondImageElement.simulate('click');
+        expect(mockRecordResultFunction).toBeCalledWith(0,1);
     });
 });
