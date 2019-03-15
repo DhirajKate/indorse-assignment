@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Container from './container';
+import ImageContainer from './image-container';
+import Header from './header';
+import ButtonsContainer from './buttons-container';
+import ResultContainer from './result-container';
 
 describe('Container component', () => {
     let containerElement;
@@ -15,7 +19,7 @@ describe('Container component', () => {
 
     it('should display the header', () => {
         const headerElement = containerElement.childAt(0);
-        expect(headerElement.type()).toEqual('Header')
+        expect(headerElement.type()).toEqual(Header)
       
     });
     describe('when user has not yet provided feedback', () => {
@@ -30,13 +34,13 @@ describe('Container component', () => {
 
         it('should display the image container', () => {
             const imageContainer = selectionContainer.childAt(0)
-            expect(imageContainer.type()).toEqual('ImageContainer')
+            expect(imageContainer.type()).toEqual(ImageContainer)
  
         });
     
         it('should display the wrapper for buttons', () => {
             const buttonContainer = selectionContainer.childAt(1)
-            expect(buttonContainer.type()).toEqual('ButtonsContainer')
+            expect(buttonContainer.type()).toEqual(ButtonsContainer)
           
         });
     });
@@ -44,10 +48,11 @@ describe('Container component', () => {
     describe('when user has provided feedback for all images', () => {
         let resultContainer;
         beforeAll(() => {
+            containerElement.setState({isFeedbackRecorded:true})
             resultContainer = containerElement.childAt(1);
         });
         it('should display the results container', () => {
-            expect(resultContainer.type()).toEqual('ResultContainer');
+            expect(resultContainer.type()).toEqual(ResultContainer);
         });
     });
    
