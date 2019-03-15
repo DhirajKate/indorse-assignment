@@ -11,6 +11,7 @@ describe('Header Component', () => {
 
     it('should render a header element', () => {
         expect(headerElement.type()).toBe('div')
+        expect(headerElement.hasClass('header')).toBeTruthy()
     });
 
     it('should display header stating "Which of these is a cat?"', () => {

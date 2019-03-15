@@ -12,3 +12,86 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.container{
+  width:50%;
+  margin: auto
+}
+
+.header{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h2{
+  color: cornflowerblue
+}
+
+.selection-container{
+  width: 100%;
+}
+
+.selection-container .image-container{
+  width: 100%;
+}
+
+.first-image,.second-image{
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+
+button{
+  height: 60px;
+  width:45%;
+  border-radius: 25px;
+  background:linear-gradient(141deg, #9fb8ad 0%, #58c8d4 0%, #0c9ed3 75%);
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.buttons-container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons-container button:first-child{
+  background:white;
+  border: 2px solid #0c9ed3;
+  color:#0c9ed3
+}
+
+.result-container{
+  width: 100%;
+  text-align: center;
+}
+
+.result-container h3{
+  font-weight: 500;
+}
+
+.image{
+  width: 100%;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .container{
+    width:100%
+  }
+
+  .first-image,.second-image,{
+    width: 100%;
+    display: inline-block;
+  }
+
+  button{
+    width:48%;
+    font-size: 14px;
+  }
+}

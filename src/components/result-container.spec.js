@@ -11,6 +11,7 @@ describe('Result Container Component', () => {
 
     it('should render a result container element', () => {
         expect(resultContainerElement.type()).toBe('div')
+        expect(resultContainerElement.hasClass('result-container')).toBeTruthy();
     });
 
     it('should display header label stating label', () => {
@@ -18,13 +19,19 @@ describe('Result Container Component', () => {
         expect(resultContainerElement.childAt(0).text()).toBe('Result')
     });
 
+    it('should display refresh message', () => {
+        expect(resultContainerElement.childAt(1).type()).toBe('h6');
+        expect(resultContainerElement.childAt(1).text()).toBe('Refresh to choose images again')
+    });
+
+
     it('should display image container', () => {
-        const imageContainer = resultContainerElement.childAt(1);
+        const imageContainer = resultContainerElement.childAt(2);
         expect(imageContainer.type()).toBe('div')
     });
 
     it('should display images based on the descending order of result', () => {
-        const imageContainer = resultContainerElement.childAt(1);
+        const imageContainer = resultContainerElement.childAt(2);
 
         const firstImageElement = imageContainer.childAt(0);
         expect(firstImageElement.type()).toBe('div')

@@ -13,6 +13,7 @@ describe('Buttons Container Component', () => {
 
     it('should render a buttons container element', () => {
         expect(buttonsContainerElement.type()).toBe('div')
+        expect(buttonsContainerElement.hasClass('buttons-container')).toBeTruthy();
     });
 
     //this condition is not clearly stated in requirement. 
