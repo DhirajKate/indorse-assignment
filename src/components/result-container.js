@@ -11,7 +11,7 @@ class ResultContainer extends Component {
                     {result.map(element=>(
                         this.props.result[element]>0?
                         <div className="image">
-                        <img src={this.props.images[element]} width='200px' />
+                        <img src={this.props.images[element]} alt="" width='200px' />
                     </div>:<React.Fragment/>
                     ))}
                 </div>

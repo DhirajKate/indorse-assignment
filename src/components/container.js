@@ -26,29 +26,29 @@ class Container extends Component {
         let firstPhotoIndex = this.state.firstPhotoIndex;
         let secondPhotoIndex = this.state.secondPhotoIndex;
 
-        if(choice==0){
-            if(selectedIndex==firstPhotoIndex){
-                result[firstPhotoIndex]==-1?result[firstPhotoIndex]=1:result[firstPhotoIndex]++;
+        if(choice===0){
+            if(selectedIndex===firstPhotoIndex){
+                result[firstPhotoIndex]===-1?result[firstPhotoIndex]=1:result[firstPhotoIndex]++;
                 result[secondPhotoIndex]<1?result[secondPhotoIndex]=0:
                 result[secondPhotoIndex]--;
             }else{
-                result[secondPhotoIndex]==-1?result[secondPhotoIndex]=1:result[secondPhotoIndex]++;
+                result[secondPhotoIndex]===-1?result[secondPhotoIndex]=1:result[secondPhotoIndex]++;
                 result[firstPhotoIndex]<1?result[firstPhotoIndex]=0:
                 result[firstPhotoIndex]--;
             }
-        }else if(choice==-1){
+        }else if(choice===-1){
             result[firstPhotoIndex]<1? result[firstPhotoIndex]=0: result[firstPhotoIndex]--;
             result[secondPhotoIndex]<1? result[secondPhotoIndex]=0: result[secondPhotoIndex]--;
        
         }else{
-            result[firstPhotoIndex]==-1? result[firstPhotoIndex]=1: result[firstPhotoIndex]++;
-            result[secondPhotoIndex]==-1? result[secondPhotoIndex]=1: result[secondPhotoIndex]++;
+            result[firstPhotoIndex]===-1? result[firstPhotoIndex]=1: result[firstPhotoIndex]++;
+            result[secondPhotoIndex]===-1? result[secondPhotoIndex]=1: result[secondPhotoIndex]++;
        
         }
 
         this.setState({result})
 
-        if (result.indexOf(-1) == -1) {
+        if (result.indexOf(-1) === -1) {
             this.setState({ isFeedbackRecorded: true })
         } else {
             this.generateActiveImagesIndexes()
