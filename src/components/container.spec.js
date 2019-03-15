@@ -5,11 +5,13 @@ import ImageContainer from './image-container';
 import Header from './header';
 import ButtonsContainer from './buttons-container';
 import ResultContainer from './result-container';
-
+import * as ImageServices from '../service';
 describe('Container component', () => {
-    let containerElement;
+    let containerElement,mockImages;
 
     beforeAll(() => {
+        mockImages = ['1.jpg','2.jpg']; 
+        ImageServices.getAllImages = jest.fn().mockReturnValue(mockImages)
         containerElement = shallow(<Container/>)
     });
 
@@ -36,6 +38,7 @@ describe('Container component', () => {
         it('should display the image container', () => {
             const imageContainer = selectionContainer.childAt(0)
             expect(imageContainer.type()).toEqual(ImageContainer)
+            expect(imageContainer.prop('images')).toEqual(mockImages)
  
         });
     

@@ -3,9 +3,12 @@ import ImageContainer from './image-container';
 import Header from './header';
 import ButtonsContainer from './buttons-container';
 import ResultContainer from './result-container';
+import {getAllImages} from '../service';
 class Container extends Component {
     state = {
-        isFeedbackRecorded: false
+        isFeedbackRecorded: false,
+        images :getAllImages(),
+        result:[]
     }
     render() {
         return (
@@ -14,7 +17,7 @@ class Container extends Component {
                 {this.state.isFeedbackRecorded ?
                     <ResultContainer /> :
                     <div className="selection-container">
-                        <ImageContainer />
+                        <ImageContainer images={this.state.images}/>
                         <ButtonsContainer />
                     </div>
                 }
