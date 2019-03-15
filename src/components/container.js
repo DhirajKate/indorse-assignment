@@ -9,7 +9,7 @@ class Container extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='container'>
                 <Header />
                 {this.state.isFeedbackRecorded ?
                     <ResultContainer /> :

@@ -15,6 +15,7 @@ describe('Container component', () => {
 
     it('should render container element', () => {
         expect(containerElement.type()).toBe('div')
+        expect(containerElement.hasClass('container')).toBeTruthy()
     });
 
     it('should display the header', () => {
