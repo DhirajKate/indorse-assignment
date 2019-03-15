@@ -46,7 +46,6 @@ class Container extends Component {
        
         }
 
-        console.log(result)
         this.setState({result})
 
         if (result.indexOf(-1) == -1) {
@@ -70,7 +69,7 @@ class Container extends Component {
             <div className='container'>
                 <Header />
                 {this.state.isFeedbackRecorded ?
-                    <ResultContainer /> :
+                    <ResultContainer result={this.state.result} images={this.state.images}/> :
                     <div className="selection-container">
                         <ImageContainer images={this.state.images} recordResult={this.recordResult} firstPhotoIndex={this.state.firstPhotoIndex} secondPhotoIndex={this.state.secondPhotoIndex} />
                         <ButtonsContainer recordResult={this.recordResult} />

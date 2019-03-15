@@ -62,6 +62,8 @@ describe('Container component', () => {
         });
         it('should display the results container', () => {
             expect(resultContainer.type()).toEqual(ResultContainer);
+            expect(resultContainer.prop('images')).toEqual(mockImages)
+            expect(resultContainer.prop('result')).toEqual(containerElement.instance().state.result)
         });
     });
 
@@ -157,7 +159,7 @@ describe('Container component', () => {
             expect(containerElement.instance().state.isFeedbackRecorded).toBeTruthy();
         });
 
-        it('should generate randome index if all the images are not yet validated by user', () => {
+        it('should generate random index if all the images are not yet validated by user', () => {
             mockImages = ['1.jpg','2.jpg','3.jpg']; 
             ImageServices.getAllImages = jest.fn().mockReturnValue(mockImages)
             containerElement = shallow(<Container/>)
@@ -170,13 +172,17 @@ describe('Container component', () => {
         
             const firstPhotoIndex = containerElement.instance().state.firstPhotoIndex;
             const secondPhotoIndex = containerElement.instance().state.secondPhotoIndex;
-            expect(firstPhotoIndex==0||firstPhotoIndex==1).toBeTruthy();
-            expect(secondPhotoIndex==0||secondPhotoIndex==1).toBeTruthy();
+            expect(firstPhotoIndex>=0||firstPhotoIndex<=2).toBeTruthy();
+            expect(secondPhotoIndex>=0||secondPhotoIndex<=2).toBeTruthy();
          });
     });
 
     describe('generate random active images indexes function', () => {
         it('should generate the random indexes of images to be displayed to user',()=>{
+            mockImages = ['1.jpg','2.jpg']; 
+            ImageServices.getAllImages = jest.fn().mockReturnValue(mockImages)
+            containerElement = shallow(<Container/>)
+            
             containerElement.setState({firstPhotoIndex:0,secondPhotoIndex:1})
             containerElement.instance().generateActiveImagesIndexes();
 
