@@ -3,10 +3,12 @@ import { shallow } from 'enzyme';
 import ButtonsContainer from './buttons-container';
 
 describe('Buttons Container Component', () => {
-    let buttonsContainerElement;
+    let buttonsContainerElement,
+        mockRecordResultFunction;
 
     beforeAll(() => {
-        buttonsContainerElement = shallow(<ButtonsContainer/>)
+        mockRecordResultFunction = jest.fn();
+        buttonsContainerElement = shallow(<ButtonsContainer recordResult={mockRecordResultFunction} />)
     });
 
     it('should render a buttons container element', () => {
@@ -27,5 +29,17 @@ describe('Buttons Container Component', () => {
         const noCatPresentButton = buttonsContainerElement.childAt(1);
         expect(noCatPresentButton.type()).toBe('button');
         expect(noCatPresentButton.text()).toBe('Both of these are Cats');
+    });
+
+    it('should call record result if user says none of the images is of cat', () => {
+        const noCatPresentButton = buttonsContainerElement.childAt(0);
+        noCatPresentButton.simulate('click');
+        expect(mockRecordResultFunction).toBeCalledWith(-1);
+    });
+
+    it('should call record result if user says both of the images are of cats', () => {
+        const noCatPresentButton = buttonsContainerElement.childAt(1);
+        noCatPresentButton.simulate('click');
+        expect(mockRecordResultFunction).toBeCalledWith(1);
     });
 });

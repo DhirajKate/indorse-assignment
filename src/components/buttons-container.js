@@ -4,8 +4,8 @@ class ButtonsContainer extends Component {
     render() {
         return (
             <div>
-                <button>None of these is a Cat</button>
-                <button>Both of these are Cats</button>
+                <button onClick={() => this.props.recordResult(-1)}>None of these is a Cat</button>
+                <button onClick={() => this.props.recordResult(1)}>Both of these are Cats</button>
             </div>
         );
     }
